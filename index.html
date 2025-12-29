@@ -1,355 +1,313 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cartinha Romântica 💖</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      margin: 0;
-      padding: 20px;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartinha Especial 💖</title>
 
-    h1, h2 { text-align: center; color: #b3124a; }
+<style>
+:root{
+  --rosa:#ff4d88;
+  --vermelho:#c2185b;
+  --preto:#0f0f14;
+}
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-      animation: fadeIn 1s ease;
-    }
+*{box-sizing:border-box;}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+body{
+  margin:0;
+  font-family:"Segoe UI",sans-serif;
+  background:linear-gradient(135deg,#0f0f14,#2a0015,#ff4d88);
+  color:white;
+  overflow-x:hidden;
+}
 
-    .hidden { display: none; }
+.tela{
+  display:none;
+  min-height:100vh;
+  padding:25px;
+  animation:fade .6s ease;
+}
 
-    button {
-      padding: 12px 18px;
-      border: none;
-      border-radius: 12px;
-      background: #e91e63;
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-      margin-top: 10px;
-    }
+.tela.ativa{display:block;}
 
-    button:hover { background: #c2185b; }
+@keyframes fade{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 6px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-    }
+.caixa{
+  max-width:700px;
+  margin:auto;
+  background:rgba(0,0,0,.6);
+  border-radius:25px;
+  padding:30px;
+  box-shadow:0 0 40px rgba(255,77,136,.4);
+  text-align:center;
+}
 
-    .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-    .tab { flex: 1; background: #eee; padding: 10px; border-radius: 10px; cursor: pointer; text-align: center; font-weight: bold; }
-    .tab.active { background: #e91e63; color: white; }
+h1,h2{
+  color:#ff7aa8;
+}
 
-    .section { display: none; }
-    .section.active { display: block; }
+button{
+  background:linear-gradient(135deg,#ff4d88,#c2185b);
+  color:white;
+  border:none;
+  padding:14px 24px;
+  border-radius:18px;
+  font-size:16px;
+  margin:10px;
+  cursor:pointer;
+  transition:.3s;
+}
 
-    .fotos { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 15px; }
-    .foto-item { position: relative; cursor: grab; }
-    .foto-item img { width: 100%; border-radius: 12px; }
+button:hover{transform:scale(1.05);}
 
-    .remove-btn {
-      position: absolute;
-      top: 5px; right: 5px;
-      background: red;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 26px;
-      height: 26px;
-      cursor: pointer;
-    }
+.voltar{background:#444;}
 
-    .capa {
-      border: 4px solid #e91e63;
-    }
+input,textarea{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  margin-top:10px;
+  font-size:16px;
+}
 
-    .tempo { font-weight: bold; margin: 15px 0; }
+textarea{resize:none;min-height:120px;}
 
-    iframe { border-radius: 12px; margin-top: 15px; }
+.fotos{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:10px;
+  margin-top:15px;
+}
 
-    /* corações */
-    .heart {
-      position: fixed;
-      bottom: -20px;
-      color: #ff4d6d;
-      font-size: 20px;
-      animation: subir 6s linear forwards;
-      opacity: 0.8;
-    }
+.fotos img{
+  width:100%;
+  border-radius:14px;
+}
 
-    @keyframes subir {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-110vh); opacity: 0; }
-    }
+.tempo{
+  font-size:20px;
+  margin-top:15px;
+  font-weight:bold;
+}
 
-    /* tela senha */
-    #senhaTela {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
+.heart{
+  position:fixed;
+  bottom:-20px;
+  color:#ff4d88;
+  animation:subir 6s linear forwards;
+}
 
-    .senhaBox {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      text-align: center;
-      max-width: 350px;
-      width: 100%;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
+@keyframes subir{
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-120vh);opacity:0}
+}
 
-    /* modo surpresa */
-    #surpresa {
-      text-align: center;
-      padding: 80px 20px;
-    }
-  </style>
+/* QR */
+#qr img{margin-top:15px;border-radius:12px;background:white;padding:10px}
+
+</style>
 </head>
 <body>
 
-<!-- TELA DE SENHA -->
-<div id="senhaTela">
-  <div class="senhaBox">
-    <h2>💌 Área secreta</h2>
-    <p>Digite a senha para entrar</p>
-    <input type="password" id="senhaInput" placeholder="Senha" />
-    <button onclick="verificarSenha()">Entrar</button>
+<!-- TELA SENHA -->
+<section class="tela ativa" id="senhaTela">
+  <div class="caixa">
+    <h1>🔐 Área Especial</h1>
+    <p>Crie uma senha para proteger essa cartinha</p>
+    <input id="senhaCriada" type="password" placeholder="Criar senha">
+    <button onclick="definirSenha()">Continuar 💖</button>
   </div>
-</div>
+</section>
 
-<div class="container hidden" id="app">
+<!-- MENU -->
+<section class="tela" id="menu">
+  <div class="caixa">
+    <h1>💌 Sua Cartinha</h1>
+    <p>Escolha o que deseja fazer</p>
 
-  <h1>💖 Criador de Cartinha</h1>
-
-  <div class="tabs">
-    <div class="tab active" onclick="abrirAba(0)">Conteúdo</div>
-    <div class="tab" onclick="abrirAba(1)">Fotos</div>
-    <div class="tab" onclick="abrirAba(2)">Música</div>
-    <div class="tab" onclick="abrirAba(3)">Visualizar</div>
+    <button onclick="ir('editor')">✍️ Criar / Editar</button>
+    <button onclick="ir('preview')">👀 Ver como ficou</button>
+    <button onclick="ir('link')">🔗 Link / QR Code</button>
   </div>
+</section>
 
-  <!-- CONTEÚDO -->
-  <div class="section active">
+<!-- EDITOR -->
+<section class="tela" id="editor">
+  <div class="caixa">
+    <h2>✍️ Conteúdo</h2>
+
     <label>Título</label>
-    <input id="titulo" placeholder="Para meu amor ❤️" />
+    <input id="titulo" placeholder="Para o amor da minha vida 💕">
 
-    <label>Data e hora do pedido</label>
-    <input type="datetime-local" id="dataInicio" />
+    <label>Data do início</label>
+    <input type="datetime-local" id="dataInicio">
 
-    <label>Texto</label>
-    <textarea id="texto" rows="6"></textarea>
+    <label>Texto da cartinha</label>
+    <textarea id="texto"></textarea>
 
-    <button onclick="salvarDados()">💾 Salvar</button>
+    <label>Fotos</label>
+    <input type="file" multiple accept="image/*" id="fotosInput">
+
+    <label>Música (MP3)</label>
+    <input type="file" accept="audio/*" id="musicaInput">
+
+    <button onclick="salvarTudo()">💾 Salvar</button>
+    <button class="voltar" onclick="ir('menu')">⬅ Voltar</button>
   </div>
+</section>
 
-  <!-- FOTOS -->
-  <div class="section">
-    <label>Selecionar fotos</label>
-    <input type="file" id="fotosArquivos" multiple accept="image/*" />
-    <p>Arraste para ordenar • Primeira vira capa</p>
+<!-- PREVIEW -->
+<section class="tela" id="preview">
+  <div class="caixa">
+    <h1 id="pTitulo"></h1>
+    <div class="tempo" id="tempo"></div>
+    <p id="pTexto"></p>
 
-    <div id="previewFotos" class="fotos"></div>
+    <div class="fotos" id="pFotos"></div>
+
+    <audio id="audio" controls loop></audio>
+
+    <br>
+    <button class="voltar" onclick="ir('menu')">⬅ Voltar</button>
   </div>
+</section>
 
-  <!-- MUSICA -->
-  <div class="section">
-    <label>Link do YouTube</label>
-    <input id="linkMusica" placeholder="https://youtube.com/..." />
-    <button onclick="salvarDados()">Salvar música</button>
+<!-- LINK / QR -->
+<section class="tela" id="link">
+  <div class="caixa">
+    <h2>🔗 Compartilhar</h2>
+    <p>Envie este link para ela:</p>
+    <input id="linkFinal" readonly>
+
+    <div id="qr"></div>
+
+    <button onclick="copiarLink()">📋 Copiar link</button>
+    <button class="voltar" onclick="ir('menu')">⬅ Voltar</button>
   </div>
-
-  <!-- VISUALIZAÇÃO -->
-  <div class="section">
-    <div id="surpresa">
-      <h2>🎁 Clique para revelar a surpresa</h2>
-      <button onclick="mostrarCartinha()">Abrir 💖</button>
-    </div>
-
-    <div id="preview" class="hidden"></div>
-  </div>
-
-</div>
+</section>
 
 <script>
-/* ================= SENHA ================= */
-const SENHA = '2304';
-
-function verificarSenha() {
-  const v = document.getElementById('senhaInput').value;
-  if (v === SENHA) {
-    document.getElementById('senhaTela').style.display = 'none';
-    document.getElementById('app').classList.remove('hidden');
-  } else alert('Senha incorreta');
+// navegação
+function ir(id){
+  document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));
+  document.getElementById(id).classList.add('ativa');
 }
 
-/* ================= ABAS ================= */
-function abrirAba(i) {
-  document.querySelectorAll('.tab').forEach((t,idx)=>t.classList.toggle('active', idx===i));
-  document.querySelectorAll('.section').forEach((s,idx)=>s.classList.toggle('active', idx===i));
-  if(i===3) gerarPreview();
+// senha
+function definirSenha(){
+  const s=document.getElementById('senhaCriada').value;
+  if(!s){alert('Crie uma senha');return;}
+  localStorage.setItem('senhaCartinha',s);
+  ir('menu');
 }
 
-/* ================= FOTOS ================= */
-let fotos = [];
-
-const inputFotos = document.getElementById('fotosArquivos');
-inputFotos.addEventListener('change', () => {
-  [...inputFotos.files].forEach(file => {
-    const reader = new FileReader();
-    reader.onload = e => {
-      fotos.push(e.target.result);
-      salvarFotos();
-      renderFotos();
-    };
-    reader.readAsDataURL(file);
-  });
-});
-
-function renderFotos() {
-  const area = document.getElementById('previewFotos');
-  area.innerHTML = '';
-
-  fotos.forEach((f, i) => {
-    const div = document.createElement('div');
-    div.className = 'foto-item' + (i === 0 ? ' capa' : '');
-    div.draggable = true;
-
-    div.innerHTML = `
-      <img src="${f}">
-      <button class="remove-btn" onclick="removerFoto(${i})">×</button>
-    `;
-
-    div.ondragstart = e => e.dataTransfer.setData('i', i);
-    div.ondragover = e => e.preventDefault();
-    div.ondrop = e => {
-      const de = e.dataTransfer.getData('i');
-      const temp = fotos[de];
-      fotos[de] = fotos[i];
-      fotos[i] = temp;
-      salvarFotos();
-      renderFotos();
-    };
-
-    area.appendChild(div);
-  });
+// salvar dados
+function salvarTudo(){
+  const dados={
+    titulo:titulo.value,
+    texto:texto.value,
+    data:dataInicio.value
+  };
+  localStorage.setItem('dadosCartinha',JSON.stringify(dados));
+  alert('Salvo com sucesso ❤️');
 }
 
-function removerFoto(i) {
-  fotos.splice(i,1);
-  salvarFotos();
-  renderFotos();
+// fotos
+let fotos=[];
+let musica=null;
+
+fotosInput.onchange=()=>{
+  [...fotosInput.files].forEach(f=>{
+    const r=new FileReader();
+    r.onload=e=>{fotos.push(e.target.result); salvarFotos();}
+    r.readAsDataURL(f);
+  })
 }
 
-function salvarFotos() {
-  localStorage.setItem('fotosBase64', JSON.stringify(fotos));
+function salvarFotos(){
+  localStorage.setItem('fotos',JSON.stringify(fotos));
 }
 
-/* ================= DADOS ================= */
-function salvarDados() {
-  localStorage.setItem('cartinha', JSON.stringify({
-    titulo: titulo.value,
-    data: dataInicio.value,
-    texto: texto.value,
-    musica: linkMusica.value
-  }));
-  alert('Salvo ❤️');
-}
-
-function carregar() {
-  const d = JSON.parse(localStorage.getItem('cartinha') || '{}');
-  titulo.value = d.titulo || '';
-  dataInicio.value = d.data || '';
-  texto.value = d.texto || '';
-  linkMusica.value = d.musica || '';
-
-  fotos = JSON.parse(localStorage.getItem('fotosBase64') || '[]');
-  renderFotos();
-}
-
-/* ================= PREVIEW FINAL ================= */
-let intervalo;
-
-function mostrarCartinha() {
-  document.getElementById('surpresa').style.display = 'none';
-  document.getElementById('preview').classList.remove('hidden');
-  gerarPreview();
-}
-
-function gerarPreview() {
-  const dados = JSON.parse(localStorage.getItem('cartinha')) || {};
-
-  let musicaHTML = '';
-  if (dados.musica) {
-    let link = dados.musica;
-    if (link.includes('watch?v=')) link = link.replace('watch?v=', 'embed/');
-    musicaHTML = `<iframe width="100%" height="315" src="${link}" allowfullscreen></iframe>`;
+musicaInput.onchange=()=>{
+  const f=musicaInput.files[0];
+  if(!f) return;
+  const r=new FileReader();
+  r.onload=e=>{
+    localStorage.setItem('musica',e.target.result);
   }
+  r.readAsDataURL(f);
+}
 
-  document.getElementById('preview').innerHTML = `
-    <div class="cartinha">
-      <h2>${dados.titulo || ''}</h2>
-      <div class="tempo" id="tempo"></div>
-      <p>${(dados.texto || '').replace(/\n/g,'<br>')}</p>
+// carregar preview
+function carregarPreview(){
+  const d=JSON.parse(localStorage.getItem('dadosCartinha')||'{}');
+  const fotosSalvas=JSON.parse(localStorage.getItem('fotos')||'[]');
+  const musicaSalva=localStorage.getItem('musica');
 
-      <div class="fotos">
-        ${fotos.map(f=>`<img src="${f}">`).join('')}
-      </div>
+  pTitulo.innerText=d.titulo||'';
+  pTexto.innerText=d.texto||'';
 
-      ${musicaHTML}
-    </div>
-  `;
+  pFotos.innerHTML='';
+  fotosSalvas.forEach(f=>{
+    const img=document.createElement('img');
+    img.src=f;
+    pFotos.appendChild(img);
+  });
 
-  if (intervalo) clearInterval(intervalo);
+  if(musicaSalva){ audio.src=musicaSalva; }
 
-  if (dados.data) {
-    const inicio = new Date(dados.data);
-    intervalo = setInterval(()=>{
-      const agora = new Date();
-      const diff = agora - inicio;
-      const d = Math.floor(diff/86400000);
-      const h = Math.floor(diff/3600000)%24;
-      const m = Math.floor(diff/60000)%60;
-      const s = Math.floor(diff/1000)%60;
-      const el = document.getElementById('tempo');
-      if(el) el.innerText = `Estamos juntos há ${d} dias, ${h}h ${m}m ${s}s ❤️`;
+  if(d.data){
+    setInterval(()=>{
+      const diff=new Date()-new Date(d.data);
+      const dias=Math.floor(diff/86400000);
+      const h=Math.floor(diff/3600000)%24;
+      const m=Math.floor(diff/60000)%60;
+      const s=Math.floor(diff/1000)%60;
+      tempo.innerText=`${dias} dias, ${h}h ${m}m ${s}s juntos 💞`;
     },1000);
   }
 }
 
-/* corações */
+// link e QR
+function gerarLink(){
+  const url=window.location.href;
+  linkFinal.value=url;
+
+  const qr=document.getElementById('qr');
+  qr.innerHTML='';
+  const img=document.createElement('img');
+  img.src=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(url)}`;
+  qr.appendChild(img);
+}
+
+function copiarLink(){
+  linkFinal.select();
+  document.execCommand('copy');
+  alert('Link copiado ❤️');
+}
+
+// sempre que entrar nessas telas
 setInterval(()=>{
-  const h = document.createElement('div');
-  h.className = 'heart';
-  h.innerText = '❤';
-  h.style.left = Math.random()*100 + 'vw';
-  h.style.fontSize = (14 + Math.random()*20) + 'px';
+  if(document.getElementById('preview').classList.contains('ativa')) carregarPreview();
+  if(document.getElementById('link').classList.contains('ativa')) gerarLink();
+},800);
+
+// corações
+setInterval(()=>{
+  const h=document.createElement('div');
+  h.className='heart';
+  h.innerText='❤';
+  h.style.left=Math.random()*100+'vw';
+  h.style.fontSize=(14+Math.random()*20)+'px';
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
-}, 800);
-
-carregar();
+},900);
 </script>
+
 </body>
 </html>
